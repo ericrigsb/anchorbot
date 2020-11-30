@@ -22,7 +22,7 @@ class AnchorBot:
         # Login to anchor.fm
         bot = self.bot
         bot.get('https://anchor.fm/login')
-        time.sleep(9)
+        time.sleep(5)
         
         email = bot.find_element_by_name('email')
         password = bot.find_element_by_name('password')
@@ -49,7 +49,7 @@ class AnchorBot:
                 
             if message.content == 'stats!':
                 anchorbot.login()
-                time.sleep(9)
+                time.sleep(12)
                 bot = self.bot
                 friendly = 'Here are the current Beers in The Lot Podcast stats from anchor.fm.'
                 error = 'Something went wrong pulling the anchor.fm stats for the Beers in The Lot podcast.'
