@@ -129,3 +129,9 @@ dmypy.json
 .pyre/
 # Container Volume
 _shared/
+# No zips
+.tar.gz
+.tgz
+.zip
+.zipx
+.7z
