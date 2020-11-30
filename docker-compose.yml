@@ -1,7 +1,11 @@
 version: "3.8"
 services:
-  anchorbot:
-    image: "anchorbot"
-    volumes:
-      - ./_shared/app:/usr/src/app
-      - ./shared/log:/var/log
+  bot:
+    env_file: .env
+    image: anchorbot
+    volumes: 
+      - ./app:/usr/src/app
+    networks:
+      - host
+networks:
+  host:
