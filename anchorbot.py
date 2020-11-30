@@ -52,11 +52,17 @@ class AnchorBot:
                 time.sleep(9)
                 bot = self.bot
                 friendly = 'Here are the current Beers in The Lot Podcast stats from anchor.fm.'
+                error = 'Something went wrong pulling the anchor.fm stats for the Beers in The Lot podcast.'
                 stats = set()
                 stats = map(lambda el: el.text, bot.find_elements_by_xpath("//div[@class = 'css-uzrgbc']"))
-                await message.channel.send(friendly)
-                for stat in stats:
-                    await message.channel.send(stat)
+                if stats != "":
+                    print(friendly)
+                    await message.channel.send(friendly)
+                    for stat in stats:
+                        print(stat)
+                        await message.channel.send(stat)
+                else:
+                    await message.channel.send(error)
 
         client.run(token)
 

@@ -28,7 +28,6 @@ RUN GECKODRIVER_VERSION=`curl https://github.com/mozilla/geckodriver/releases/la
   && tar -zxf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz -C /usr/local/bin \
   && chmod +x /usr/local/bin/geckodriver \
   && rm geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-#COPY geckodriver /usr/local/bin/
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY anchorbot.py .
