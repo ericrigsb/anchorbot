@@ -3,7 +3,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
 import os
 import time
-import json
 import discord
 
 class AnchorBot:

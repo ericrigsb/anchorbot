@@ -3,9 +3,11 @@ services:
   bot:
     env_file: .env
     image: anchorbot
+    working_dir: /usr/src/app
     volumes: 
       - ./app:/usr/src/app
     networks:
       - host
+    command: bash -c "pip install -r requirements.txt && python3 anchorbot.py"
 networks:
   host:
