@@ -127,14 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-# Container Volume
-_shared/
-# No zips
-.tar
-.tar.gz
-.tgz
-.zip
-.zipx
-.7z
+
 # No Mac
 .DS_Store
