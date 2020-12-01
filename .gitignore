@@ -130,9 +130,10 @@ dmypy.json
 # Container Volume
 _shared/
 # No zips
-.tar
-.tar.gz
+.tar*
 .tgz
 .zip
 .zipx
 .7z
+# No Mac
+.DS_Store
