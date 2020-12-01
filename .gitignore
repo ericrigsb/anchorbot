@@ -130,6 +130,7 @@ dmypy.json
 # Container Volume
 _shared/
 # No zips
+.tar
 .tar.gz
 .tgz
 .zip
