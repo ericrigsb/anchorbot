@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
+from PIL import Image
+import io
 import os
 import time
 import discord
@@ -32,6 +34,23 @@ class AnchorBot:
         email.send_keys(self.username)
         password.send_keys(self.password)
         password.send_keys(Keys.RETURN)
+
+    def genimg(self):
+        anchorbot.login()
+        time.sleep(12)
+        bot = self.bot
+
+        snapshot_image_path = 'snapshot_screenshot.png'
+        snapshot_image = bot.find_element_by_xpath("//div[@class = 'css-av84af']").screenshot_as_png
+        snapshot_imageStream = io.BytesIO(snapshot_image)
+        snapshot_im = Image.open(snapshot_imageStream)
+        snapshot_im.save(snapshot_image_path)
+
+        weekly_image_path = 'weekly_screenshot.png'
+        weekly_image = bot.find_element_by_xpath("//div[@class = 'VictoryContainer']").screenshot_as_png
+        weekly_imageStream = io.BytesIO(weekly_image)
+        weekly_im = Image.open(weekly_imageStream)
+        weekly_im.save(weekly_image_path)
         
     def exec(self):
         token = os.environ['TOKEN']
@@ -47,21 +66,17 @@ class AnchorBot:
                 return
                 
             if message.content == 'stats!':
-                anchorbot.login()
-                time.sleep(12)
+                anchorbot.genimg()
+                time.sleep(6)
                 bot = self.bot
-                friendly = 'Here are the current Beers in The Lot Podcast stats from anchor.fm.'
-                error = 'Something went wrong pulling the anchor.fm stats for the Beers in The Lot podcast.'
-                stats = set()
-                stats = map(lambda el: el.text, bot.find_elements_by_xpath("//div[@class = 'css-uzrgbc']"))
-                if stats != "":
-                    print(friendly)
-                    await message.channel.send(friendly)
-                    for stat in stats:
-                        print(stat)
-                        await message.channel.send(stat)
-                else:
-                    await message.channel.send(error)
+                snapshot_image_path = 'snapshot_screenshot.png'
+                weekly_image_path = 'weekly_screenshot.png'
+                snapshot_stats = 'Here are the current Beers in The Lot Podcast stats from anchor.fm.'
+                weekly_stats = 'Here is the total plays per week trend.'
+                await message.channel.send(snapshot_stats)
+                await message.channel.send(file=discord.File(snapshot_image_path))
+                await message.channel.send(weekly_stats)
+                await message.channel.send(file=discord.File(weekly_image_path))
 
         client.run(token)
 

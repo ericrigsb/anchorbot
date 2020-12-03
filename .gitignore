@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# No Data
+.png
+
 # No Mac
 .DS_Store
