@@ -62,7 +62,7 @@ class AnchorBot:
         @commands.has_role(role)
         async def anchor_stats(ctx):
             anchorbot.genimg()
-            snapshot_stats = 'Here are the current Beers in The Lot Podcast stats from anchor.fm.'
+            snapshot_stats = 'Here are the current podcast stats from anchor.fm.'
             weekly_stats = 'Here is the total plays per week trend.'
             await ctx.send(snapshot_stats)
             await ctx.channel.send(file=discord.File(self.snapshot_image_path))
