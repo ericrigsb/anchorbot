@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # No Data
-.png
+*.png
 
 # No Mac
 .DS_Store
