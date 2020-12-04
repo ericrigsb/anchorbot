@@ -18,7 +18,7 @@ Reference to get started: https://realpython.com/how-to-make-a-discord-bot-pytho
 
 Adjust the image parameter in docker-compose.yml as necessary.
 
-Copy .env.sample to .env and enter values for Anchor.fm username and password, and Discord bot token (see above regarding application and bot requirement).
+Copy .env.sample to .env and enter values for Anchor.fm username and password; and Discord bot token (see above regarding application and bot requirement) and Discord server role you want to allow to invoke the bot.
 
 Run `docker-compose up`
 
