@@ -1,4 +1,5 @@
 from selenium import webdriver
+from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
 from PIL import Image
@@ -12,13 +13,14 @@ class AnchorBot:
 
     def __init__(self):
         # Build up auth for browser 
+        executable = GeckoDriverManager().install()
         options = Options()
         options.headless = True
         username = os.environ['USERNAME']
         password = os.environ['PASSWORD']
         self.username = username
         self.password = password
-        self.browser = webdriver.Firefox(options=options)
+        self.browser = webdriver.Firefox(executable_path=executable, options=options)
         snapshot_image_path = 'snapshot_screenshot.png'        
         weekly_image_path = 'weekly_screenshot.png'
         self.snapshot_image_path = snapshot_image_path
