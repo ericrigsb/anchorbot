@@ -8,6 +8,6 @@ services:
       - ./app:/usr/src/app
     networks:
       - host
-    command: bash -c "pip install -r requirements.txt && python3 anchorbot.py"
+    command: bash -c "pip install -r requirements.txt && python3 -u anchorbot.py"
 networks:
   host:

@@ -23,10 +23,12 @@ class AnchorBot:
         self.browser = webdriver.Firefox(executable_path=executable, options=options)
         snapshot_image_path = 'snapshot_screenshot.png'        
         weekly_image_path = 'weekly_screenshot.png'
+        charts_image_path = 'charts_screenshot.png'
         self.snapshot_image_path = snapshot_image_path
         self.weekly_image_path = weekly_image_path
+        self.charts_image_path = charts_image_path
 
-    def login(self):
+    def anchor_login(self):
         # Login to anchor.fm
         browser = self.browser
         browser.get('https://anchor.fm/login')
@@ -39,9 +41,9 @@ class AnchorBot:
         password.send_keys(self.password)
         password.send_keys(Keys.RETURN)
 
-    def genimg(self):
+    def anchor_genimg(self):
         # Generate screenshots
-        anchorbot.login()
+        anchorbot.anchor_login()
         time.sleep(12)
         browser = self.browser
         # Generates boxscore stats screenshot
@@ -54,7 +56,21 @@ class AnchorBot:
         weekly_imageStream = io.BytesIO(weekly_image)
         weekly_im = Image.open(weekly_imageStream)
         weekly_im.save(self.weekly_image_path)
-        
+
+    def chartable_genimg(self):
+        # Open Chartable
+        chartable_url = os.environ['CHARTABLE']
+        browser = self.browser
+        browser.get(chartable_url)
+        time.sleep(8)
+        browser.find_element_by_xpath("//a[@class = 'link pa2 bg-blue white br2']").click()
+        time.sleep(1)
+        # Generates Charts screenshot
+        charts_image = browser.find_element_by_xpath("//table[@class = 'w-100 f5 mb1']").screenshot_as_png
+        charts_imageStream = io.BytesIO(charts_image)
+        charts_im = Image.open(charts_imageStream)
+        charts_im.save(self.charts_image_path)
+
     def exec(self):
         # The Discord bot
         token = os.environ['TOKEN']
@@ -63,13 +79,17 @@ class AnchorBot:
         @bot.command(name='stats')
         @commands.has_role(role)
         async def anchor_stats(ctx):
-            anchorbot.genimg()
+            anchorbot.anchor_genimg()
+            anchorbot.chartable_genimg()
             snapshot_stats = 'Here are the current podcast stats from anchor.fm.'
             weekly_stats = 'Here is the total plays per week trend.'
+            charts_stats = 'Here is where the podcast ranks on Apple Podcasts Charts'
             await ctx.send(snapshot_stats)
             await ctx.channel.send(file=discord.File(self.snapshot_image_path))
             await ctx.channel.send(weekly_stats)
             await ctx.channel.send(file=discord.File(self.weekly_image_path))
+            await ctx.channel.send(charts_stats)
+            await ctx.channel.send(file=discord.File(self.charts_image_path))
         bot.run(token)
 
 anchorbot = AnchorBot()
