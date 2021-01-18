@@ -84,8 +84,8 @@ class AnchorBot:
         # The Discord bot
         token = os.environ['TOKEN']
         role = os.environ['ROLE']
-        bot = commands.Bot(command_prefix='!')
-        @bot.command(name='stats')
+        bot = commands.Bot(command_prefix=':bitl_stats:')
+        @bot.command(name='get')
         @commands.has_role(role)
         async def anchor_stats(ctx):
             anchorbot.anchor_genimg()
