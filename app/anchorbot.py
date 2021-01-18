@@ -63,19 +63,21 @@ class AnchorBot:
         browser = self.browser
         browser.get(chartable_url)
         time.sleep(8)
-        if browser.find_element_by_xpath("//a[@class = 'link pa2 bg-blue white br2']"):
-            browser.find_element_by_xpath("//a[@class = 'link pa2 bg-blue white br2']").click()
+        popup = browser.find_element_by_xpath("//a[@class = 'link pa2 bg-blue white br2']")
+        if popup:
+            popup[0].click()
             time.sleep(1)
         else:
-            time.sleep(10)
+            time.sleep(1)
         # Generates Charts screenshot
-        if browser.find_element_by_xpath("//table[@class = 'w-100 f5 mb1']"):
-            charts_image = browser.find_element_by_xpath("//table[@class = 'w-100 f5 mb1']").screenshot_as_png
+        charts = browser.find_elements_by_xpath("//table[@class = 'w-100 f5 mb1']")
+        if charts:
+            charts_image = charts[0].screenshot_as_png
             charts_imageStream = io.BytesIO(charts_image)
             charts_im = Image.open(charts_imageStream)
             charts_im.save(self.charts_image_path)
         else:
-            time.sleep(8)
+            time.sleep(1)
 
     def exec(self):
         # The Discord bot
