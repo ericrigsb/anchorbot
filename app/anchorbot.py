@@ -76,6 +76,7 @@ class AnchorBot:
             charts_imageStream = io.BytesIO(charts_image)
             charts_im = Image.open(charts_imageStream)
             charts_im.save(self.charts_image_path)
+            time.sleep(1)
         else:
             time.sleep(1)
 
@@ -90,14 +91,26 @@ class AnchorBot:
             anchorbot.anchor_genimg()
             anchorbot.chartable_genimg()
             snapshot_stats = 'Here are the current podcast stats from anchor.fm.'
+            no_snapshot_stats = 'Podcast stats from anchor.fm are unavailable right now.'
             weekly_stats = 'Here is the total plays per week trend.'
+            no_weekly_stats = 'The total plays per week stats are unavailable right now.'
             charts_stats = 'Here is where the podcast ranks on Apple Podcasts Charts'
-            await ctx.send(snapshot_stats)
-            await ctx.channel.send(file=discord.File(self.snapshot_image_path))
-            await ctx.channel.send(weekly_stats)
-            await ctx.channel.send(file=discord.File(self.weekly_image_path))
-            await ctx.channel.send(charts_stats)
-            await ctx.channel.send(file=discord.File(self.charts_image_path))
+            no_charts_stats = 'The Apple Podcast Charts are currently not available.'
+            if os.path.isfile(self.snapshot_image_path):
+                await ctx.send(snapshot_stats)
+                await ctx.channel.send(file=discord.File(self.snapshot_image_path))
+            else:
+                await ctx.send(no_snapshot_stats)
+            if os.path.isfile(self.weekly_image_path):
+                await ctx.channel.send(weekly_stats)
+                await ctx.channel.send(file=discord.File(self.weekly_image_path))
+            else:
+                await ctx.channel.send(no_weekly_stats)
+            if os.path.isfile(self.charts_image_path):
+                await ctx.channel.send(charts_stats)
+                await ctx.channel.send(file=discord.File(self.charts_image_path))
+            else:
+                await ctx.channel.send(no_charts_stats)
         bot.run(token)
 
 anchorbot = AnchorBot()
