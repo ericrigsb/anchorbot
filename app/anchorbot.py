@@ -63,7 +63,7 @@ class AnchorBot:
         browser = self.browser
         browser.get(chartable_url)
         time.sleep(8)
-        popup = browser.find_element_by_xpath("//a[@class = 'link pa2 bg-blue white br2']")
+        popup = browser.find_elements_by_xpath("//a[@class = 'link pa2 bg-blue white br2']")
         if popup:
             popup[0].click()
             time.sleep(1)
