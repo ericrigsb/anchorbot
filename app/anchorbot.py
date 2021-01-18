@@ -66,7 +66,7 @@ class AnchorBot:
         if browser.find_element_by_xpath("//a[@class = 'link pa2 bg-blue white br2']"):
             browser.find_element_by_xpath("//a[@class = 'link pa2 bg-blue white br2']").click()
             time.sleep(1)
-        else
+        else:
             time.sleep(10)
         # Generates Charts screenshot
         if browser.find_element_by_xpath("//table[@class = 'w-100 f5 mb1']"):
@@ -74,7 +74,7 @@ class AnchorBot:
             charts_imageStream = io.BytesIO(charts_image)
             charts_im = Image.open(charts_imageStream)
             charts_im.save(self.charts_image_path)
-        else
+        else:
             time.sleep(8)
 
     def exec(self):
