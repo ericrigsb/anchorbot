@@ -44,28 +44,18 @@ class AnchorBot:
     def anchor_genimg(self):
         # Generate screenshots
         anchorbot.anchor_login()
-        time.sleep(24)
+        time.sleep(12)
         browser = self.browser
         # Generates boxscore stats screenshot
-        snapshot = browser.find_element_by_xpath("//div[@class = 'css-av84af']")
-        if snapshot:
-            snapshot_image = snapshot[0].screenshot_as_png
-            snapshot_imageStream = io.BytesIO(snapshot_image)
-            snapshot_im = Image.open(snapshot_imageStream)
-            snapshot_im.save(self.snapshot_image_path)
-            time.sleep(1)
-        else:
-            time.sleep(1)
+        snapshot_image = browser.find_element_by_xpath("//div[@class = 'css-av84af']").screenshot_as_png
+        snapshot_imageStream = io.BytesIO(snapshot_image)
+        snapshot_im = Image.open(snapshot_imageStream)
+        snapshot_im.save(self.snapshot_image_path)
         # Generates weekly total plays screenshot
-        weekly = browser.find_element_by_xpath("//div[@class = 'VictoryContainer']")
-        if weekly:
-            weekly_image = weekly[0].screenshot_as_png
-            weekly_imageStream = io.BytesIO(weekly_image)
-            weekly_im = Image.open(weekly_imageStream)
-            weekly_im.save(self.weekly_image_path)
-            time.sleep(1)
-        else:
-            time.sleep(1)
+        weekly_image = browser.find_element_by_xpath("//div[@class = 'VictoryContainer']").screenshot_as_png
+        weekly_imageStream = io.BytesIO(weekly_image)
+        weekly_im = Image.open(weekly_imageStream)
+        weekly_im.save(self.weekly_image_path)
 
     def chartable_genimg(self):
         # Open Chartable
@@ -76,7 +66,7 @@ class AnchorBot:
         popup = browser.find_elements_by_xpath("//a[@class = 'link pa2 bg-blue white br2']")
         if popup:
             popup[0].click()
-            time.sleep(20)
+            time.sleep(15)
         else:
             time.sleep(1)
         # Generates Charts screenshot
