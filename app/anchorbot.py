@@ -69,6 +69,12 @@ class AnchorBot:
             time.sleep(1)
         else:
             time.sleep(1)
+        popup2 = browser.find_elements_by_xpath("//a[@class = 'announcekit-booster-modal-close']")
+        if popup:
+            popup2[0].click()
+            time.sleep(1)
+        else:
+            time.sleep(1)
         # Generates Charts screenshot
         charts = browser.find_elements_by_xpath("//table[@class = 'w-100 f5 mb1']")
         if charts:
