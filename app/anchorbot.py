@@ -70,7 +70,7 @@ class AnchorBot:
         else:
             time.sleep(1)
         popup2 = browser.find_elements_by_xpath("//a[@class = 'announcekit-booster-modal-close']")
-        if popup:
+        if popup2:
             popup2[0].click()
             time.sleep(1)
         else:
