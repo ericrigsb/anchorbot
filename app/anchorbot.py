@@ -62,11 +62,11 @@ class AnchorBot:
         chartable_url = os.environ['CHARTABLE']
         browser = self.browser
         browser.get(chartable_url)
-        time.sleep(8)
+        time.sleep(24)
         popup = browser.find_elements_by_xpath("//a[@class = 'link pa2 bg-blue white br2']")
         if popup:
             popup[0].click()
-            time.sleep(15)
+            time.sleep(1)
         else:
             time.sleep(1)
         # Generates Charts screenshot
