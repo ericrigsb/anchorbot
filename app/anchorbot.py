@@ -47,12 +47,12 @@ class AnchorBot:
         time.sleep(12)
         browser = self.browser
         # Generates boxscore stats screenshot
-        snapshot_image = browser.find_element_by_xpath("//div[@class = 'css-av84af']").screenshot_as_png
+        snapshot_image = browser.find_element_by_xpath("//div[@class = 'css-1v0aegs']").screenshot_as_png
         snapshot_imageStream = io.BytesIO(snapshot_image)
         snapshot_im = Image.open(snapshot_imageStream)
         snapshot_im.save(self.snapshot_image_path)
         # Generates weekly total plays screenshot
-        weekly_image = browser.find_element_by_xpath("//div[@class = 'VictoryContainer']").screenshot_as_png
+        weekly_image = browser.find_element_by_xpath("//div[@class = 'css-ptvnpi ']").screenshot_as_png
         weekly_imageStream = io.BytesIO(weekly_image)
         weekly_im = Image.open(weekly_imageStream)
         weekly_im.save(self.weekly_image_path)
